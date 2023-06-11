@@ -11,13 +11,15 @@ export default function Login() {
         password: ''
     })
 
+   console.log(values);
+
     const navigate = useNavigate()
     // const {form} = Form.useForm();
     const handleFormInput = (event) => {
       setValues(event.target.name, event.target.value);
     };
     axios.defaults.withCredentials = true;
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         // event.preventDefault();
         // form.resetFields();   
         axios.post('http://localhost:8081/login', values)
@@ -27,8 +29,9 @@ export default function Login() {
             }else{
                 alert(res.data.Message)
                 setValues({
-                  email: '',
-                  password: ''
+                  ...values, 
+                  email: "",
+                  password: ""
                 })
                 
             }
